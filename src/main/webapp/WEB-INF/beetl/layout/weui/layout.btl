@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--: include("/layout/weui/header.btl"){}  -->
+</head>
+
+<body>${layoutContent}
+<!--: include("/layout/weui/footer.btl"){}  -->
+</body>
+
+</html>

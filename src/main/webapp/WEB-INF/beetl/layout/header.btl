@@ -1,6 +1,0 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-<title>${pageTitle!}</title>
-<!-- 引入 WeUI -->
-<link rel="stylesheet" href="${ctxPath}/assets/weui/style/weui.css" />
-<script src="${ctxPath}/assets/jquery/jquery.js"></script>
