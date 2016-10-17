@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--: include("/layout/header.btl"){}  -->
+</head>
+
+<body>${layoutContent}
+<!--: include("/layout/footer.btl"){}  -->
+</body>
+
+</html>

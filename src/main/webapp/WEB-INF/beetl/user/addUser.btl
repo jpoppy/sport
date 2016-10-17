@@ -1,0 +1,40 @@
+<!--:
+ layout("/layout/layout.btl"){
+ -->
+
+<form>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+			<div class="weui-cell__bd">
+				<input name="name" required class="weui-input" placeholder="请输入姓名" />
+			</div>
+		</div>
+		<div class="weui-cell weui-cells_form">
+			<div class="weui-cell__hd">
+				<label class="weui-label">手机号</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input name="mobile" class="weui-input" type="tel" placeholder="请输入手机号">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label for="" class="weui-label">微信运动链接</label></div>
+			<div class="weui-cell__bd">
+				<input name="_url" class="weui-textarea"  placeholder="请输入微信运动链接"/>
+			</div>
+		</div>
+	</div>
+	<div class="weui-btn-area">
+		<a class="weui-btn weui-btn_primary" href="javascript:" id="add_user_btn">确定</a>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#add_user_btn').click(function(){
+		alert(1)
+	});
+});
+</script>
+<!--:} -->
