@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Strings;
 import org.nutz.mvc.adaptor.PairAdaptor;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
@@ -15,11 +16,12 @@ import org.nutz.mvc.annotation.Param;
 
 import com.poppy.sport.bean.User;
 import com.poppy.sport.service.UserService;
+import com.poppy.sport.uti.URLUtil;
 
 @IocBean
 @At("/user")
 public class UserModule {
-	
+
 	@Inject
 	private UserService userService;
 
@@ -27,18 +29,23 @@ public class UserModule {
 	public int count() {
 		return userService.count();
 	}
-	
-	@AdaptBy(type=PairAdaptor.class)
+
+	@AdaptBy(type = PairAdaptor.class)
 	@At("/add")
 	@POST
-	public User addUser(@Param("..") User user){
+	public User addUser(@Param("..") User user, @Param("_url") String wxurl) {
+		if (Strings.isNotBlank(wxurl)) {
+			user.setOpenid(URLUtil.URLRequest(wxurl).get("openid"));
+		}
+		userService._fastInsert(user);
 		return user;
 	}
+
 	@GET
 	@At("/add")
 	@Ok("beetl:user/addUser.btl")
-	public void addUser(){
-		
+	public void addUser() {
+
 	}
 
 	@At

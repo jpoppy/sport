@@ -1,5 +1,8 @@
 package com.poppy.sport.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.nutz.dao.entity.annotation.ColDefine;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
@@ -34,12 +37,29 @@ public class User {
 	@ColDefine(width = 11)
 	@Comment("手机号")
 	private Long mobile;
-	
+
 	@Column
-	@ColDefine(width=1)
+	@ColDefine(width = 1)
 	@Comment("性别 1 男 0 女")
 	private Integer sex;
-	
+
+	// @Many(target = Score.class, field = "openid")
+	private List<Score> userScores;
+
+	public void addScore(Score score) {
+		if (userScores == null) {
+			userScores = new ArrayList<Score>();
+		}
+		userScores.add(score);
+	}
+
+	public List<Score> getUserScores() {
+		return userScores;
+	}
+
+	public void setUserScores(List<Score> userScores) {
+		this.userScores = userScores;
+	}
 
 	public Integer getSex() {
 		return sex;

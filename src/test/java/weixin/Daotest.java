@@ -1,8 +1,12 @@
 package weixin;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
-import org.nutz.dao.util.Daos;
+import org.nutz.dao.Sqls;
+import org.nutz.dao.sql.Sql;
+import org.nutz.dao.sql.SqlCallback;
 import org.nutz.ioc.Ioc;
 import org.nutz.ioc.impl.NutIoc;
 import org.nutz.ioc.loader.annotation.AnnotationIocLoader;
@@ -32,8 +38,8 @@ public class Daotest {
 
 	@Before
 	public void init() {
-		Daos.createTablesInPackage(dao, User.class, true);
-		Daos.migration(dao, "com.poppy.sport.bean", true, true);
+		// Daos.createTablesInPackage(dao, User.class, true);
+		// Daos.migration(dao, "com.poppy.sport.bean", true, true);
 	}
 
 	@Test
@@ -75,6 +81,7 @@ public class Daotest {
 		// List<User> users = sql.getList(User.class);
 		// System.out.println(Json.toJson(users));
 	}
+
 	@Test
 	public void testInsertOpenid() {
 		Map<String, String> users = new HashMap<String, String>();
@@ -101,6 +108,61 @@ public class Daotest {
 
 		}
 		dao.fastInsert(data);
+
+	}
+
+	@Test
+	public void featchLink() {
+		Sql sql = dao.sqls().create("user.score");
+		sql.setCallback(new SqlCallback() {
+
+			@Override
+			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+				List<User> list = new LinkedList<User>();
+
+				Map<String, User> userMap = new HashMap<String, User>();
+
+				while (rs.next()) {
+					String name = rs.getString("name");
+					Integer id = rs.getInt("id");
+					String openid = rs.getString("openid");
+					Date rankDate = rs.getDate("rank_date");
+					int dayScore = rs.getInt("day_score");
+					Date createTime = rs.getDate("create_time");
+					Date updateTime = rs.getDate("update_time");
+
+					Score score = new Score();
+					score.setId(id);
+					score.setOpenid(openid);
+					score.setRankDate(rankDate);
+					score.setDayScore(dayScore);
+					score.setCreateTime(createTime);
+					score.setUpdateTime(updateTime);
+
+					User user = userMap.get(name);
+					if (user == null) {
+						user = new User();
+						list.add(user);
+					} 
+					user.setName(name);
+					user.addScore(score);
+					userMap.put(name, user);
+					
+					
+				}
+
+				return list;
+			}
+		});
+		dao.execute(sql);
+		List<User> list = sql.getList(User.class);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i).getName() + " : " );
+			for (Score s : list.get(i).getUserScores()) {
+				System.out.print("  "+s.getRankDate()+" - " + s.getRankScore()+";");
+			}
+			System.out.println();
+		}
 
 	}
 

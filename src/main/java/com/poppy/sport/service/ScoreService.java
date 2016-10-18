@@ -2,26 +2,32 @@ package com.poppy.sport.service;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Strings;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.service.IdEntityService;
 
 import com.poppy.sport.bean.RankResult;
 import com.poppy.sport.bean.Score;
+import com.poppy.sport.exception.RankException;
 import com.poppy.sport.uti.HttpUtil;
 
 @IocBean(args = { "dao" })
 public class ScoreService extends IdEntityService<Score> {
+
+	private static final Log log = Logs.get();
+
 	public ScoreService(Dao dao) {
 		super(dao);
 	}
 
 	public Score saveScore(Score score) {
 		String openid = score.getOpenid();
-		if (StringUtils.isBlank(openid)) {
+		if (Strings.isBlank(openid)) {
 			return null;
 		}
 
@@ -52,10 +58,15 @@ public class ScoreService extends IdEntityService<Score> {
 
 	public Score autoSave(String openid) {
 
-		RankResult rankResult = HttpUtil.getRank(openid);
+		RankResult rankResult = null;
+		try {
+			rankResult = HttpUtil.getRank(openid);
+		} catch (RankException e) {
+			log.error("获取运动信息错误" + e.getMessage());
+		}
+
 		if (rankResult == null) {
 			return null;
-			//throw new RuntimeException("");
 		}
 
 		Score score = _queryNowByopenid(openid);
