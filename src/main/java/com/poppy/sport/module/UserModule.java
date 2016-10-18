@@ -17,6 +17,7 @@ import org.nutz.mvc.annotation.Param;
 import com.poppy.sport.bean.User;
 import com.poppy.sport.service.UserService;
 import com.poppy.sport.uti.URLUtil;
+import com.poppy.sport.vo.AjaxReault;
 
 @IocBean
 @At("/user")
@@ -33,12 +34,12 @@ public class UserModule {
 	@AdaptBy(type = PairAdaptor.class)
 	@At("/add")
 	@POST
-	public User addUser(@Param("..") User user, @Param("_url") String wxurl) {
+	public AjaxReault addUser(@Param("..") User user, @Param("_url") String wxurl) {
 		if (Strings.isNotBlank(wxurl)) {
 			user.setOpenid(URLUtil.URLRequest(wxurl).get("openid"));
 		}
 		userService._fastInsert(user);
-		return user;
+		return AjaxReault.success("添加成功").setData(user);
 	}
 
 	@GET
