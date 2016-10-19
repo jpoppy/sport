@@ -1,11 +1,14 @@
 package com.poppy.sport.module;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Strings;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.mvc.adaptor.PairAdaptor;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
@@ -18,10 +21,14 @@ import com.poppy.sport.bean.User;
 import com.poppy.sport.service.UserService;
 import com.poppy.sport.uti.URLUtil;
 import com.poppy.sport.vo.AjaxReault;
+import com.poppy.sport.vo.DataTableParam;
+import com.poppy.sport.vo.DataTableRecord;
 
 @IocBean
 @At("/user")
 public class UserModule {
+
+	private static final Log log = Logs.get();
 
 	@Inject
 	private UserService userService;
@@ -47,6 +54,29 @@ public class UserModule {
 	@Ok("beetl:user/addUser.btl")
 	public void addUser() {
 
+	}
+
+	@GET
+	@At("/list")
+	@Ok("beetl:user/list.btl")
+	public void list() {
+
+	}
+
+	@POST
+	@At("/list")
+	public DataTableRecord<User> list(@Param("..") DataTableParam param) {
+		log.info(param);
+		DataTableRecord<User> result = new DataTableRecord<User>();
+		result.setDraw(param.getDraw());
+
+		List<User> users = userService.query();
+
+		result.setRecordsFiltered(users.size());
+		result.setRecordsTotal(users.size());
+
+		result.setData(users);
+		return result;
 	}
 
 	@At
