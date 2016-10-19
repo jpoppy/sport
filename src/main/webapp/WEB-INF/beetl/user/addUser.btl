@@ -1,5 +1,5 @@
 <!--:
- layout("/layout/layui/layout.btl"){
+layout("/layout/layui/layout.btl"){
  -->
 
 <form class="layui-form" method="post" action="${ctxPath}/user/add">
