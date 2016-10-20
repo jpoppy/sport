@@ -30,7 +30,7 @@ $(document).ready(function() {
         "ajax": {"url":"${ctxPath}/score/list","type":"post"},
         "bPaginate" : false,
         "bInfo": false,
-        columns: [
+        "columns": [
                   {"data": "name"},
                   {"data": "name"},
                   {"data": "name"},

@@ -13,12 +13,7 @@
 
 		<link rel="stylesheet" href="${ctxPath}/assets/layui/css/layui.css" media="all">
 		<link rel="stylesheet" href="${ctxPath}/assets/global.css" media="all">
-		<script src="${ctxPath}/assets/layui/layui.js" charset="utf-8"></script>
-		<script>
-			layui.config({
-				base: '${ctxPath}/assets/layui/mymodules/'
-			}).use('global');
-		</script>
+
 	</head>
 
 	<body>
@@ -29,17 +24,17 @@
 				</a>
 				<ul class="layui-nav">
 					<li class="layui-nav-item layui-this">
-						<a href="">文档</a>
+						<a href="/doc/">文档</a>
 					</li>
 					<li class="layui-nav-item ">
-						<a href="">演示</a>
+						<a href="/demo/">演示</a>
 					</li>
 
 					<li class="layui-nav-item">
-						<a href="" target="_blank">社区</a>
+						<a href="http://fly.layui.com/" target="_blank">社区</a>
 					</li>
 					<li class="layui-nav-item site-nav-layim">
-						<a href="" target="_blank"></a>
+						<a href="http://layim.layui.com/" target="_blank">LayIM</a>
 					</li>
 				</ul>
 			</div>
@@ -52,15 +47,15 @@
 					<li>
 						<h2>基础说明</h2></li>
 
-					<li class="site-tree-noicon layui-this ">
-						<a href="${ctxPath}/user/add"><cite>添加用户</cite></a>
+					<li class="site-tree-noicon ">
+						<a href="/doc/"><cite>开始使用</cite></a>
 					</li>
 					<li class="site-tree-noicon ">
-						<a href="${ctxPath}/user/list">
+						<a href="/doc/base/infrastructure.html">
 							<cite>底层支撑</cite>
 						</a>
 					</li>
-					<li class="site-tree-noicon">
+					<li class="site-tree-noicon layui-this">
 						<a href="/doc/base/element.html">
 							<cite>页面元素</cite>
 							<em>规范 / 公共类、属性</em>
@@ -78,7 +73,7 @@
 			</div>
 
 			<div class="site-content">
-				${layoutContent}
+				
 			</div>
 		</div>
 
@@ -94,6 +89,12 @@
 			<i class="layui-icon">&#xe602;</i>
 		</div>
 		<div class="site-mobile-shade"></div>
+		<script src="${ctxPath}/assets/layui/layui.js" charset="utf-8"></script>
+		<script>
+			layui.config({
+				base: '${ctxPath}/assets/layui/mymodules/'
+			}).use('global');
+		</script>
 
 		<script>
 		</script>

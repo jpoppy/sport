@@ -1,0 +1,13 @@
+
+<div class="layui-footer footer footer-doc">
+	<div class="layui-main">
+		<p>
+			2016 &copy; <a href="/">layui.com</a> LGPL license
+		</p>
+		<p></p>
+	</div>
+</div>
+<div class="site-tree-mobile layui-hide">
+	<i class="layui-icon">&#xe602;</i>
+</div>
+<div class="site-mobile-shade"></div>
