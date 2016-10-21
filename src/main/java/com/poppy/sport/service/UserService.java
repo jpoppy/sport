@@ -40,6 +40,7 @@ public class UserService extends IdEntityService<User> {
 					String openid = rs.getString("openid");
 					Date rankDate = rs.getDate("rank_date");
 					int dayScore = rs.getInt("day_score");
+					int rankScore = rs.getInt("rankdesc_score");
 					Date createTime = rs.getDate("create_time");
 					Date updateTime = rs.getDate("update_time");
 
@@ -47,6 +48,7 @@ public class UserService extends IdEntityService<User> {
 					score.setId(id);
 					score.setOpenid(openid);
 					score.setRankDate(rankDate);
+					score.setRankScore(rankScore);
 					score.setDayScore(dayScore);
 					score.setCreateTime(createTime);
 					score.setUpdateTime(updateTime);
