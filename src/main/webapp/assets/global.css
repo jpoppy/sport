@@ -10,7 +10,7 @@
 .site-inline{font-size: 0;}
 .site-tree, .site-content{display: inline-block;  *display:inline; *zoom:1; vertical-align: top; font-size: 14px;}
 .site-tree{width: 220px; min-height: 900px; padding: 5px 0 20px;}
-.site-content{width: 899px; min-height: 900px; padding: 20px 0 50px 20px;}
+.site-content{width: 98%/*899px*/; min-height: 900px; padding: 20px 0 50px 20px;}
 
 /* 头部 */
 .header{height: 65px; border-bottom: 1px solid #404553;  background-color: #393D49; color: #fff;}

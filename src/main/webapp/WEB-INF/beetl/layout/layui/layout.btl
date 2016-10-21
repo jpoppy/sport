@@ -26,7 +26,7 @@
 		<!--: include("/layout/layui/_menu.btl"){} -->
 		<div class="layui-main site-inline">
 			
-			<!--: include("/layout/layui/_sidebar.btl"){} -->	
+			<!--: // include("/layout/layui/_sidebar.btl"){} -->	
 
 			<div class="site-content">
 				${layoutContent}

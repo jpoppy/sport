@@ -8,8 +8,8 @@ import org.nutz.mvc.annotation.Ok;
 @IocBean
 @At("/")
 public class IndexModule {
-	@Ok("beetl:index.html")
-	@At("/index")
+	@Ok("->:/score/list")
+	@At({"/index","/"})
 	@Fail("void")
 	public void index() {
 		
