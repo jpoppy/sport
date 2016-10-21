@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>页面元素规范与说明 - Layui</title>
+		<title>${title!"我运动我健康"}</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -22,81 +22,17 @@
 	</head>
 
 	<body>
-		<div class="layui-header header header-doc">
-			<div class="layui-main">
-				<a class="logo" href="/">
-					<img src="${ctxPath}/assets/sp.png" alt="layui">
-				</a>
-				<ul class="layui-nav">
-					<li class="layui-nav-item layui-this">
-						<a href="">文档</a>
-					</li>
-					<li class="layui-nav-item ">
-						<a href="">演示</a>
-					</li>
-
-					<li class="layui-nav-item">
-						<a href="" target="_blank">社区</a>
-					</li>
-					<li class="layui-nav-item site-nav-layim">
-						<a href="" target="_blank"></a>
-					</li>
-				</ul>
-			</div>
-		</div>
-
+		
+		<!--: include("/layout/layui/_menu.btl"){} -->
 		<div class="layui-main site-inline">
-			<div class="site-tree">
-				<ul class="layui-tree">
-
-					<li>
-						<h2>基础说明</h2></li>
-
-					<li class="site-tree-noicon layui-this ">
-						<a href="${ctxPath}/user/add"><cite>添加用户</cite></a>
-					</li>
-					<li class="site-tree-noicon ">
-						<a href="${ctxPath}/user/list">
-							<cite>底层支撑</cite>
-						</a>
-					</li>
-					<li class="site-tree-noicon">
-						<a href="/doc/base/element.html">
-							<cite>页面元素</cite>
-							<em>规范 / 公共类、属性</em>
-						</a>
-					</li>
-					<li class="site-tree-noicon ">
-						<a href="/doc/base/modules.html">
-							<cite>组件规范</cite>
-							<em>使用 / 模块扩展</em>
-						</a>
-					</li>
-
-					
-				</ul>
-			</div>
+			
+			<!--: include("/layout/layui/_sidebar.btl"){} -->	
 
 			<div class="site-content">
 				${layoutContent}
 			</div>
 		</div>
-
-		<div class="layui-footer footer footer-doc">
-			<div class="layui-main">
-				<p>2016 &copy;
-					<a href="/">layui.com</a> LGPL license</p>
-				<p>
-				</p>
-			</div>
-		</div>
-		<div class="site-tree-mobile layui-hide">
-			<i class="layui-icon">&#xe602;</i>
-		</div>
-		<div class="site-mobile-shade"></div>
-
-		<script>
-		</script>
+		<!--: include("/layout/layui/_footer.btl"){} -->	
 	</body>
 
 </html>

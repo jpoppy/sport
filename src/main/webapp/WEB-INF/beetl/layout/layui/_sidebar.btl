@@ -1,0 +1,16 @@
+<div class="site-tree">
+	<ul class="layui-tree">
+		<li>
+			<h2>用户信息</h2>
+		</li>
+		<li class="site-tree-noicon layui-this ">
+			<a href="${ctxPath}/user/list">
+				<cite>用户列表</cite>
+			</a>
+		</li>
+		<li class="site-tree-noicon ">
+			<a href="${ctxPath}/user/add"><cite>添加用户</cite></a>
+		</li>
+
+	</ul>
+</div>

@@ -33,12 +33,19 @@
 
 	var times = now.getTime() - start.getTime();
 	var days = parseInt(times / (1000 * 60 * 60 * 24));
-
+	function scoreRender(data,type,row){
+		var s = 0;
+		for(var item in row){
+			if(row[item]>8000){
+				s++
+			}
+		}
+		return s;
+	}
 	function getColumns() {
 		var columns = [];
-		columns.push({
-			"data" : "name"
-		});
+		columns.push({ "data" : "name" });
+		columns.push({ "data" : "总得分" ,"render" :  scoreRender});
 		for(var i = days; i >= 0; i--) {
 			var date = new Date(start.getTime()+i*(1000 * 60 * 60 * 24));
 			columns.push({"data":date.Format()});
@@ -59,6 +66,11 @@
 		$('#example').DataTable( {
 	        "processing": true,
 	        //"serverSide": true,
+	       /* "scrollY": "200px",
+	        "scrollY": true,
+	        "fixedColumns": {
+	        	"leftColumns" : 2
+            },*/
 	        "bFilter": true, //过滤功能
 			"bSort": true, //排序功能
 	        "ajax": {"url":"${ctxPath}/score/list","type":"post"},
