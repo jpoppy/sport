@@ -30,11 +30,11 @@ public class HttpUtil {
 		return client;
 	}
 
-	private static String PASS_TICKET = "NqBQ8RymN%2BVr4Rz5%2BejOEbcdCjjZ96bCBFjaaYQvLMs%3D";
+	private static String PASS_TICKET = "4DVaV1jWr8HaxB%2Bdw4UkOOa2l%2FjsIsXdVsPkti8NRak%3D";
 	private static String Q_UA2 = "QV=3&PL=ADR&PR=WX&PP=com.tencent.mm&PPVN=6.3.27&TBSVC=36803&CO=BK&COVC=036849&PB=GE&VE=GA&DE=PHONE&CHID=0&LCID=9422&MO= MINOTELTE &RL=1080*1920&OS=6.0.1&API=23";
 	private static String Q_GUID = "187a6c3cf9b9a3dcac4d1ad613b788cb";
 	private static String Q_AUTH = "31045b957cf33acf31e40be2f3e71c5217597676a9729f1b";
-	private static String HWSTEPRANKSK = "d1QDWOqJv3NuspO6qNdxGR52Bn3VJcnajbf2cyxm-CErCrvP";
+	private static String HWSTEPRANKSK = "gL0NWOP-4U_0JEd1gAeMSX3Y3APrxI8RfkRGMsLEiu5oRc20";
 
 	public static HttpGet getHttpGet(String openid) {
 		HttpGet httpGet = new HttpGet("https://hw.weixin.qq.com/steprank/step/personal?openid=" + openid + "&fromShare=1&from=singlemessage&isappinstalled=0&pass_ticket=" + PASS_TICKET);
@@ -120,7 +120,7 @@ public class HttpUtil {
 
 	public static void main(String[] args) {
 		try {
-			CloseableHttpResponse response1 = getHttpClient().execute(getHttpGet("o95gotzzgue5jzsmx8ytdlhz0hbw"));
+			CloseableHttpResponse response1 = getHttpClient().execute(getHttpGet("o95gOtxJYn3sb3Bw6Qj1iNescmWc"));
 			HttpEntity entity1 = response1.getEntity();
 			String html = EntityUtils.toString(entity1);
 			System.out.println(html);
