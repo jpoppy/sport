@@ -1,3 +1,7 @@
+<!--:
+layout("/layout/layui/layout.btl"){
+ -->
+
 <form class="layui-form" method="post" action="${ctxPath}/user/add">
 	<div class="layui-form-item">
 		<label class="layui-form-label">姓名</label>
@@ -25,10 +29,10 @@
 			<input type="radio" name="sex" value="0" title="女" >
 		</div>
 	</div>
-	<div class="layui-form-item">
+	<div class="layui-form-item layui-form-text">
 		<label class="layui-form-label">微信链接</label>
 		<div class="layui-input-block">
-			<input type="text" name="_url"    placeholder="请输入内容" autocomplete="off" class="layui-input">
+			<textarea name="_url" placeholder="请输入内容" class="layui-textarea"></textarea>
 		</div>
 	</div>
 	<div class="layui-form-item">
@@ -70,3 +74,6 @@ layui.use('form', function () {
 
 
 </script>
+
+ 
+<!--:} -->

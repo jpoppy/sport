@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -21,6 +22,7 @@ import com.poppy.sport.bean.Score;
 import com.poppy.sport.bean.User;
 import com.poppy.sport.service.ScoreService;
 import com.poppy.sport.service.UserService;
+import com.poppy.sport.vo.AjaxReault;
 import com.poppy.sport.vo.DataTableParam;
 import com.poppy.sport.vo.DataTableRecord;
 
@@ -41,12 +43,31 @@ public class ScoreModule {
 	public void list() {
 
 	}
-	
-	private void initDate(Map<Object, Object> score){
-		DateTime start = new DateTime(2016,10,1, 0, 0);
+	@At("/auto")
+	public AjaxReault auto() {
+		List<User> users = userService.query();
+		List<Score> scores = new ArrayList<Score>();
+		Random random = new Random();
+		for (User user : users) {
+			Score score = scoreService.autoSave(user.getOpenid());
+			scores.add(score);
+			log.info("---"+user.getName()+" : "+score.getRankScore());
+			int sleep = random.nextInt(10) + 10;
+			try {
+				Thread.sleep(sleep);// 避免操作太快被服务器拒绝
+			} catch (InterruptedException e) {
+				log.error(e);
+			}
+		}
+		log.info("--------------------");
+		return AjaxReault.success("autosuccess", scores);
+	}
+
+	private void initDate(Map<Object, Object> score) {
+		DateTime start = new DateTime(2016, 10, 1, 0, 0);
 		DateTime now = new DateTime();
 		int d = Days.daysBetween(start, now).getDays();
-		for (int i = d; i >=0; i--) {
+		for (int i = d; i >= 0; i--) {
 			DateTime dateTime = start.plusDays(i);
 			score.put(dateTime.toString("yyyy-MM-dd"), -1);
 		}

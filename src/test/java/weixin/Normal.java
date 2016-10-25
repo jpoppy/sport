@@ -1,10 +1,13 @@
 package weixin;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Random;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.junit.Test;
+import org.nutz.lang.Lang;
 
 public class Normal {
 	@Test
@@ -24,5 +27,14 @@ public class Normal {
 			System.out.println(dateTime.toString("yyyy-MM-dd"));
 		}
 		System.out.println(d);
+	}
+	@Test
+	public void testReadCookie(){
+		try {
+			String s = Lang.readAll(new FileReader("f://cookie.txt"));
+			System.out.println(s);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

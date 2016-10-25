@@ -10,6 +10,7 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function (exports) {
 	form = layui.form(),
 	util = layui.util;
 
+	/*
 	//首页banner
 	setTimeout(function () {
 		$('.site-zfj').addClass('site-zfj-anim');
@@ -30,8 +31,9 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function (exports) {
 	$('.site-down').on('click', function () {
 		$.get('http://fly.layui.com/api/handle?id=10');
 	});
-
+*/
 	//固定Bar
+	/*
 	util.fixbar({
 		bar1 : true,
 		click : function (type) {
@@ -40,6 +42,8 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function (exports) {
 			}
 		}
 	});
+	*/
+	util.fixbar();
 
 	//窗口scroll
 ;
