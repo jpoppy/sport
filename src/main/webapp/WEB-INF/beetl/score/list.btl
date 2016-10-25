@@ -36,7 +36,7 @@
 	function scoreRender(data,type,row){
 		var s = 0;
 		for(var item in row){
-			if(row[item]>8000){
+			if(row[item] >= 8000){
 				s++
 			}
 		}

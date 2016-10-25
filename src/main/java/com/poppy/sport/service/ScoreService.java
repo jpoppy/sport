@@ -46,7 +46,9 @@ public class ScoreService extends IdEntityService<Score> {
 			old.setHtml("手动录入");
 			old.setOpenid(score.getOpenid());
 			old.setRankDate(score.getRankDate());
-			old.setRankScore(score.getRankScore());
+
+			old.setRankScore(score.getRankScore() > old.getRankScore() ? score.getRankScore() : old.getRankScore());
+
 			old.setUpdateTime(new Date());
 
 			old.setDayScore(_calculateScore(score.getRankScore()));
