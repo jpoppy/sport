@@ -30,14 +30,14 @@ public class HttpUtil {
 		return client;
 	}
 
-	private static String PASS_TICKET = "4DVaV1jWr8HaxB%2Bdw4UkOOa2l%2FjsIsXdVsPkti8NRak%3D";
+	private static String PASS_TICKET = "EpTWrpJpBWV7LZAR4Ka+6jfc7bSk6IDJPVmX0D26uaQ=";
 	private static String Q_UA2 = "QV=3&PL=ADR&PR=WX&PP=com.tencent.mm&PPVN=6.3.27&TBSVC=36803&CO=BK&COVC=036849&PB=GE&VE=GA&DE=PHONE&CHID=0&LCID=9422&MO= MINOTELTE &RL=1080*1920&OS=6.0.1&API=23";
 	private static String Q_GUID = "187a6c3cf9b9a3dcac4d1ad613b788cb";
 	private static String Q_AUTH = "31045b957cf33acf31e40be2f3e71c5217597676a9729f1b";
-	private static String HWSTEPRANKSK = "gL0NWOP-4U_0JEd1gAeMSX3Y3APrxI8RfkRGMsLEiu5oRc20";
+	private static String HWSTEPRANKSK = "eCYXWOQRIlK2-uZ6bxOgh267ngI4gm1SM_vADWTFI-ST10mg";
 
 	public static HttpGet getHttpGet(String openid) {
-		HttpGet httpGet = new HttpGet("https://hw.weixin.qq.com/steprank/step/personal?openid=" + openid + "&fromShare=1&from=singlemessage&isappinstalled=0&pass_ticket=" + PASS_TICKET);
+		HttpGet httpGet = new HttpGet("https://hw.weixin.qq.com/steprank/step/personal?openid=" + openid + "&fromShare=1&from=singlemessage&isappinstalled=0&pass_ticket2=" + PASS_TICKET);
 		httpGet.setHeader("accept-language", "zh-CN,zh;q=0.8,en-us;q=0.6,en;q=0.5;q=0.4");
 		httpGet.setHeader("connection", "keep-alive");
 		httpGet.setHeader("accept-encoding", "gzip, deflate");

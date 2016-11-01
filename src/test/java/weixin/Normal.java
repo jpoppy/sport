@@ -37,4 +37,10 @@ public class Normal {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void round(){
+		System.out.println(Math.round(-11.8));
+		System.out.println(Math.round(11.5));
+	}
 }

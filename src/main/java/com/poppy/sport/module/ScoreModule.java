@@ -2,8 +2,10 @@ package com.poppy.sport.module;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.joda.time.DateTime;
@@ -25,6 +27,7 @@ import com.poppy.sport.service.UserService;
 import com.poppy.sport.vo.AjaxReault;
 import com.poppy.sport.vo.DataTableParam;
 import com.poppy.sport.vo.DataTableRecord;
+import com.poppy.sport.vo.Serie;
 
 @IocBean
 @At("/score")
@@ -43,6 +46,44 @@ public class ScoreModule {
 	public void list() {
 
 	}
+
+	@GET
+	@Ok("beetl:score/chart.btl")
+	@At("/chart")
+	public void chart() {
+
+	}
+
+	@POST
+	@At("/chart")
+	public List<Serie<Integer>> lineChart() {
+
+		List<Serie<Integer>> result = new ArrayList<Serie<Integer>>();
+
+		List<User> users = userService.queryUserScores();
+
+		for (User user : users) {
+			Map<String, Integer> scores = new LinkedHashMap<String, Integer>();
+			initChartDate(scores);
+			for (Score score : user.getUserScores()) {
+				scores.put(new DateTime(score.getRankDate()).toString("yyyy-MM-dd"), score.getRankScore());
+			}
+
+			Serie<Integer> serie = new Serie<Integer>();
+			serie.setName(user.getName());
+			List<Integer> data = new ArrayList<Integer>();
+			for (Entry<String, Integer> sc : scores.entrySet()) {
+				data.add(sc.getValue());
+			}
+			serie.setData(data);
+			result.add(serie);
+
+		}
+
+		return result;
+
+	}
+
 	@At("/auto")
 	public AjaxReault auto() {
 		List<User> users = userService.query();
@@ -51,7 +92,7 @@ public class ScoreModule {
 		for (User user : users) {
 			Score score = scoreService.autoSave(user.getOpenid());
 			scores.add(score);
-			log.info("---"+user.getName()+" : "+score.getRankScore());
+			log.info("---" + user.getName() + " : " + score.getRankScore());
 			int sleep = random.nextInt(10) + 10;
 			try {
 				Thread.sleep(sleep);// 避免操作太快被服务器拒绝
@@ -68,6 +109,16 @@ public class ScoreModule {
 		DateTime now = new DateTime();
 		int d = Days.daysBetween(start, now).getDays();
 		for (int i = d; i >= 0; i--) {
+			DateTime dateTime = start.plusDays(i);
+			score.put(dateTime.toString("yyyy-MM-dd"), -1);
+		}
+	}
+
+	private void initChartDate(Map<String, Integer> score) {
+		DateTime start = new DateTime(2016, 10, 1, 0, 0);
+		DateTime now = new DateTime();
+		int d = Days.daysBetween(start, now).getDays();
+		for (int i = 0; i <= d; i++) {
 			DateTime dateTime = start.plusDays(i);
 			score.put(dateTime.toString("yyyy-MM-dd"), -1);
 		}

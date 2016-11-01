@@ -32,7 +32,7 @@ public class MyQuartzJob implements Job {
 			scoreService.autoSave(user.getOpenid());
 			int sleep = random.nextInt(40) + 10;
 			try {
-				Thread.sleep(sleep);//避免操作太快被服务器拒绝
+				Thread.sleep(sleep*500);//避免操作太快被服务器拒绝
 			} catch (InterruptedException e) {
 				log.error(e);
 			}
