@@ -30,11 +30,22 @@ public class HttpUtil {
 		return client;
 	}
 
-	private static String PASS_TICKET = "EpTWrpJpBWV7LZAR4Ka+6jfc7bSk6IDJPVmX0D26uaQ=";
-	private static String Q_UA2 = "QV=3&PL=ADR&PR=WX&PP=com.tencent.mm&PPVN=6.3.27&TBSVC=36803&CO=BK&COVC=036849&PB=GE&VE=GA&DE=PHONE&CHID=0&LCID=9422&MO= MINOTELTE &RL=1080*1920&OS=6.0.1&API=23";
+	public static void depose() {
+		if (client != null) {
+			try {
+				client.close();
+			} catch (IOException e) {
+			}
+		}
+		cookieStore = null;
+		client = null;
+	}
+
+	public static String HWSTEPRANKSK = System.getProperty("HWSTEPRANKSK");
+	public static String PASS_TICKET = System.getProperty("PASS_TICKET");
+	private static String Q_UA2 = "QV=3&PL=ADR&PR=WX&PP=com.tencent.mm&PPVN=6.3.30&TBSVC=36842&CO=BK&COVC=036872&PB=GE&VE=GA&DE=PHONE&CHID=0&LCID=9422&MO= MINOTELTE &RL=1080*1920&OS=6.0.1&API=23";
 	private static String Q_GUID = "187a6c3cf9b9a3dcac4d1ad613b788cb";
 	private static String Q_AUTH = "31045b957cf33acf31e40be2f3e71c5217597676a9729f1b";
-	private static String HWSTEPRANKSK = "eCYXWOQRIlK2-uZ6bxOgh267ngI4gm1SM_vADWTFI-ST10mg";
 
 	public static HttpGet getHttpGet(String openid) {
 		HttpGet httpGet = new HttpGet("https://hw.weixin.qq.com/steprank/step/personal?openid=" + openid + "&fromShare=1&from=singlemessage&isappinstalled=0&pass_ticket2=" + PASS_TICKET);
@@ -53,6 +64,9 @@ public class HttpUtil {
 	}
 
 	private static CloseableHttpClient makeDefaultClient() {
+
+		HWSTEPRANKSK = System.getProperty("HWSTEPRANKSK");
+		PASS_TICKET = System.getProperty("PASS_TICKET");
 
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
 		cm.setMaxTotal(200);

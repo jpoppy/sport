@@ -3,6 +3,7 @@ layout("/layout/layui/layout.btl"){
  -->
 
 <form class="layui-form" method="post" action="${ctxPath}/c/add">
+	<!-- 
 	<div class="layui-form-item">
 		<label class="layui-form-label">Q-UA2</label>
 		<div class="layui-input-block">
@@ -23,18 +24,19 @@ layout("/layout/layui/layout.btl"){
 			<input type="text" name="qauth" autocomplete="off" class="layui-input">
 		</div>
 	</div>
+	 -->
 	
 	<div class="layui-form-item">
 		<label class="layui-form-label">hwstepranksk</label>
 		<div class="layui-input-block">
-			<input type="text" name="hwstepranksk" autocomplete="off" class="layui-input">
+			<input type="text" required   name="hwstepranksk" autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	
 	<div class="layui-form-item">
 		<label class="layui-form-label">pass_ticket</label>
 		<div class="layui-input-block">
-			<input type="text" name="passTicket" autocomplete="off" class="layui-input">
+			<input type="text" required   name="passTicket" autocomplete="off" class="layui-input">
 		</div>
 	</div>
 	

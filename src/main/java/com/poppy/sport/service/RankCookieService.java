@@ -5,6 +5,7 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 
 import com.poppy.sport.bean.RankCookie;
+import com.poppy.sport.uti.HttpUtil;
 
 @IocBean
 public class RankCookieService {
@@ -12,10 +13,9 @@ public class RankCookieService {
 	private Dao dao;
 
 	public RankCookie insert(RankCookie rankCookie) {
-
-		dao.clear(RankCookie.class);
-		dao.insert(rankCookie);
-
+		System.setProperty("PASS_TICKET", rankCookie.getPassTicket());
+		System.setProperty("HWSTEPRANKSK", rankCookie.getHwstepranksk());
+		HttpUtil.depose();
 		return rankCookie;
 	}
 

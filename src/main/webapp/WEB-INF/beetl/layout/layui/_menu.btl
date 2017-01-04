@@ -4,10 +4,12 @@
 			<img src="${ctxPath}/assets/sp.png" alt="layui">
 		</a>
 		<ul class="layui-nav">
-			<li class="layui-nav-item layui-this">
+		<!-- 
+			<li class="layui-nav-item ">
 				<a href="${ctxPath}/user/list">团队成员</a>
 			</li>
-			<li class="layui-nav-item ">
+		 -->
+			<li class="layui-nav-item layui-this">
 				<a href="${ctxPath}/score/list">得分统计</a>
 			</li>
 		</ul>
