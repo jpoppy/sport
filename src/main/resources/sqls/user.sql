@@ -14,4 +14,6 @@ t_score.update_time
 
 FROM
 t_user
-LEFT JOIN t_score ON t_score.openid = t_user.u_openid ORDER BY `name`,rank_date ASC
+LEFT JOIN t_score ON t_score.openid = t_user.u_openid 
+$condition
+ORDER BY `name`,rank_date ASC

@@ -12,6 +12,15 @@
 	href="${ctxPath}/assets/bootstrap-3.3.5/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
 	href="${ctxPath}/assets/DataTables-1.10.12/media/css/dataTables.bootstrap.css">
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+
+
+
 
 <script type="text/javascript">
 	$
@@ -28,8 +37,9 @@
 
 
 <script type="text/javascript">
-	var start = new Date(2016, 9, 1); //开始计算日期 10.1
 	var now = new Date();
+	var diff = 86400 * 1000 * 31 * 3;
+	var start = new Date(now.getTime()-diff); //开始计算日期 10.1
 
 	var times = now.getTime() - start.getTime();
 	var days = parseInt(times / (1000 * 60 * 60 * 24));
@@ -75,6 +85,13 @@
 		});
 		
 		$('#example').DataTable( {
+			dom: 'Bfrtip',
+			buttons: [
+			            'copyHtml5',
+			            'excelHtml5',
+			            'csvHtml5',
+			            'pdfHtml5'
+			        ],
 	        "processing": true,
 	        //"serverSide": true,
 	       /* "scrollY": "200px",
@@ -84,7 +101,14 @@
             },*/
 	        "bFilter": true, //过滤功能
 			"bSort": true, //排序功能
-	        "ajax": {"url":"${ctxPath}/score/list","type":"post"},
+	        "ajax": {
+	        	"url":"${ctxPath}/score/list",
+	        	"type":"post",
+	        	"data":{
+	        		"startDate": start.Format(),
+	        		"endDate":  now.Format()
+	        	}
+	        },
 	        "bPaginate" : false,
 	        "bInfo": false,
 	        "columns": getColumns()

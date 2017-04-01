@@ -1,11 +1,10 @@
 package com.poppy.sport.module;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import org.joda.time.DateTime;
@@ -27,7 +26,6 @@ import com.poppy.sport.service.UserService;
 import com.poppy.sport.vo.AjaxReault;
 import com.poppy.sport.vo.DataTableParam;
 import com.poppy.sport.vo.DataTableRecord;
-import com.poppy.sport.vo.Serie;
 
 @IocBean
 @At("/score")
@@ -54,35 +52,36 @@ public class ScoreModule {
 
 	}
 
-	@POST
-	@At("/chart")
-	public List<Serie<Integer>> lineChart() {
-
-		List<Serie<Integer>> result = new ArrayList<Serie<Integer>>();
-
-		List<User> users = userService.queryUserScores();
-
-		for (User user : users) {
-			Map<String, Integer> scores = new LinkedHashMap<String, Integer>();
-			initChartDate(scores);
-			for (Score score : user.getUserScores()) {
-				scores.put(new DateTime(score.getRankDate()).toString("yyyy-MM-dd"), score.getRankScore());
-			}
-
-			Serie<Integer> serie = new Serie<Integer>();
-			serie.setName(user.getName());
-			List<Integer> data = new ArrayList<Integer>();
-			for (Entry<String, Integer> sc : scores.entrySet()) {
-				data.add(sc.getValue());
-			}
-			serie.setData(data);
-			result.add(serie);
-
-		}
-
-		return result;
-
-	}
+	// @POST
+	// @At("/chart")
+	// public List<Serie<Integer>> lineChart() {
+	//
+	// List<Serie<Integer>> result = new ArrayList<Serie<Integer>>();
+	//
+	// List<User> users = userService.queryUserScores();
+	//
+	// for (User user : users) {
+	// Map<String, Integer> scores = new LinkedHashMap<String, Integer>();
+	// initChartDate(scores);
+	// for (Score score : user.getUserScores()) {
+	// scores.put(new DateTime(score.getRankDate()).toString("yyyy-MM-dd"),
+	// score.getRankScore());
+	// }
+	//
+	// Serie<Integer> serie = new Serie<Integer>();
+	// serie.setName(user.getName());
+	// List<Integer> data = new ArrayList<Integer>();
+	// for (Entry<String, Integer> sc : scores.entrySet()) {
+	// data.add(sc.getValue());
+	// }
+	// serie.setData(data);
+	// result.add(serie);
+	//
+	// }
+	//
+	// return result;
+	//
+	// }
 
 	@At("/auto")
 	public AjaxReault auto() {
@@ -126,12 +125,14 @@ public class ScoreModule {
 
 	@POST
 	@At("/list")
-	public DataTableRecord<Map<Object, Object>> list(@Param("..") DataTableParam param) {
+	public DataTableRecord<Map<Object, Object>> list(@Param("..") DataTableParam param, @Param("startDate") Date startDate, @Param("endDate") Date endDate) {
 		log.info(param);
+		log.info(new DateTime(startDate).toString("yyyy-MM-dd"));
+		log.info(endDate);
 		DataTableRecord<Map<Object, Object>> result = new DataTableRecord<Map<Object, Object>>();
 		result.setDraw(param.getDraw());
 
-		List<User> users = userService.queryUserScores();
+		List<User> users = userService.queryUserScores(startDate, endDate);
 
 		List<Map<Object, Object>> data = new ArrayList<Map<Object, Object>>();
 

@@ -9,7 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
+import org.nutz.dao.sql.Criteria;
 import org.nutz.dao.sql.Sql;
 import org.nutz.dao.sql.SqlCallback;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -24,8 +26,11 @@ public class UserService extends IdEntityService<User> {
 		super(dao);
 	}
 
-	public List<User> queryUserScores() {
+	public List<User> queryUserScores(Date start, Date end) {
 		Sql sql = dao().sqls().create("user.score");
+		Criteria cri = Cnd.cri();
+		cri.where().and("rank_date", ">=", start).and("rank_date", "<=", end);
+		sql.setCondition(cri);
 		sql.setCallback(new SqlCallback() {
 
 			@Override
